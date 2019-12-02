@@ -33,3 +33,20 @@ browse to https://hellofacade.<domain>/			observe 'hello internal foo'
 browse to https://hellofacade.<domain>/			observe 'hello external search'
 browse to https://hellofacade.<domain>/			observe 'hello external search foo'
 	
+
+CONFIGURATION OF HELLOFACADE / SPRING CLOUD GATEWAY
+		/src/main/resources/application.yml
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: external
+        uri: https://helloexternal.homelab.fynesy.com
+        predicates:
+        - Path=/search/**
+        
+      - id: default
+        uri: https://hellointernal.homelab.fynesy.com
+        predicates:
+        - Path=/**
