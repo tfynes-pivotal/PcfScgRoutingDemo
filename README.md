@@ -19,24 +19,25 @@ Note - URLs are not being rewritten at this point.
 
 DEMO:
 
-browse to https://hellointernal.<domain>/		observe 'hello internal'
-browse to https://hellointernal.<domain>/foo		observe 'hello internal foo'
+browse to https://hellointernal.my-domain/		observe 'hello internal'
+browse to https://hellointernal.my-domain/foo		observe 'hello internal foo'
 
-browse to https://helloexternal.<domain>/search		observe 'hello external search'
-browse to https://helloexternal.<domain>/search/foo	observe 'hello external search foo'
+browse to https://helloexternal.my-domain/search		observe 'hello external search'
+browse to https://helloexternal.my-domain/search/foo	observe 'hello external search foo'
 
 NOW SHOW HOW BOTH HELLOINTERNAL AND HELLOEXTERNAL ARE ACCESSIBLE VIA A SINGLE FACADE HOSTNAME
 
-browse to https://hellofacade.<domain>/ 		observe 'hello internal'
-browse to https://hellofacade.<domain>/			observe 'hello internal foo'
+browse to https://hellofacade.my-domain/ 		observe 'hello internal'
+browse to https://hellofacade.my-domain/foo		observe 'hello internal foo'
 
-browse to https://hellofacade.<domain>/			observe 'hello external search'
-browse to https://hellofacade.<domain>/			observe 'hello external search foo'
+browse to https://hellofacade.my-domain/search		observe 'hello external search'
+browse to https://hellofacade.my-domain/search/foo	observe 'hello external search foo'
 	
 
 CONFIGURATION OF HELLOFACADE / SPRING CLOUD GATEWAY
 		/src/main/resources/application.yml
 
+`
 spring:
   cloud:
     gateway:
@@ -45,8 +46,8 @@ spring:
         uri: https://helloexternal.homelab.fynesy.com
         predicates:
         - Path=/search/**
-        
       - id: default
         uri: https://hellointernal.homelab.fynesy.com
         predicates:
         - Path=/**
+`
